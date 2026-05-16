@@ -1,0 +1,167 @@
+* {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial,
+    sans-serif;
+  color: #c5c6ca;
+  background: #1d1e22;
+}
+
+.logo {
+  padding: 0px;
+  margin: 15px;
+  box-shadow: 10px 10px 10px -5px black;
+  border: 0px;
+  border-radius: 20px;
+  overflow: hidden;
+  width: 150px;
+  height: auto;
+  flex-shrink: 0;
+}
+
+em {
+  background: transparent;
+}
+
+p.sectiontext {
+  padding: 0px;
+}
+
+h1 {
+  padding: 0px;
+  font-size: 60px;
+}
+
+h2 {
+  padding: 0px;
+}
+
+h3 {
+  margin: 5px 10px;
+  font-weight: bold;
+}
+
+.header {
+  grid-area: Header;
+}
+
+.logos {
+  grid-area: Logos;
+  margin: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.aboutus {
+  grid-area: AboutUs;
+  border: 5px outset grey;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 10px;
+  box-shadow: 10px 10px 10px -5px black;
+}
+
+.projectsnippet {
+  grid-area: ProjectSnippet;
+  border: 5px outset grey;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 10px;
+  box-shadow: 10px 10px 10px -5px black;
+}
+
+.teaminfo {
+  grid-area: TeamInfo;
+  display: block;
+}
+
+.teaminfo p {
+  margin: 10px;
+}
+
+div.cards {
+  justify-content: left;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0px;
+}
+
+div.personcard {
+  border-radius: 10px;
+  border: 5px outset grey;
+  box-shadow: 10px 10px 10px -5px black;
+  margin: 10px;
+  width: 200px;
+  height: 305px;
+  overflow: hidden;
+}
+
+img.profilepic {
+  width: 100%;
+  height: auto;
+  margin: 0px;
+  padding: 0px;
+  border-bottom: 2px solid grey;
+}
+
+.githubLogo {
+  width: 20px;
+  height: 20px;
+  margin-left: 10px;
+  margin-right: 5px;
+}
+
+.footer {
+  grid-area: Footer;
+}
+
+.footerline{
+  grid-area: FooterLine;
+  border: none;
+  border-top: 2px solid grey;
+  margin: 20px 0px;
+  padding: 0px;
+  width: 100%;
+}
+
+@media screen and (min-width: 600px) {
+  main {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-rows: auto auto auto auto auto;
+
+    grid-template-areas:
+      "Header Logos Logos"
+      "ProjectSnippet AboutUs AboutUs"
+      "TeamInfo TeamInfo TeamInfo"
+      "FooterLine FooterLine FooterLine"
+      "Footer Footer Footer";
+  }
+}
+
+@media screen and (max-width: 600px) {
+  main {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto auto auto auto;
+
+    grid-template-areas:
+      "Header"
+      "Logos"
+      "AboutUs"
+      "ProjectSnippet"
+      "TeamInfo"
+      "FooterLine"
+      "Footer";
+  }
+
+  h1 {
+    font-size: 50px;
+  }
+
+  .logos {
+    margin: 0px;
+    align-items: center;
+    justify-content: center;
+  }
+}
