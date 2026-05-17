@@ -7,13 +7,479 @@ const roadmapMermaid = document.getElementById("roadmap-mermaid");
 const roadmapCurrent = document.getElementById("roadmap-current");
 const roadmapNav = document.getElementById("roadmap-nav");
 const roadmapDetails = document.getElementById("roadmap-details");
+const heroStarsCanvas = document.getElementById("hero-stars");
+const heroCopy = document.querySelector(".hero-copy");
 const latestWorkPath =
 	window.siteConfig?.latestWorkPath || "./data/latest-work.json";
 const teamMembersPath =
 	window.siteConfig?.teamMembersPath || "./data/team-members.json";
 const roadmapPath = window.siteConfig?.roadmapPath || "./data/roadmap.json";
+const HERO_STARS_MAX_DPR = 1.75;
+const HERO_STARS_SEED = 28411;
+const HERO_STARS_ANIMATION_FPS = 18;
+const HERO_STARS_MAX_PLACEMENT_ATTEMPTS = 20;
+const SPARKLE_SVG = `
+	<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+		<path fill="#ffffff" d="M12 1.75L14.56 9.44L22.25 12L14.56 14.56L12 22.25L9.44 14.56L1.75 12L9.44 9.44Z"/>
+	</svg>
+`;
+const heroStarsMotionQuery =
+	window.matchMedia?.("(prefers-reduced-motion: reduce)") || null;
 
 let roadmapState = null;
+let heroStarfieldState = null;
+let heroStarfieldFrame = 0;
+let heroStarfieldAnimationFrame = 0;
+
+const sparkleSprite = new Image();
+
+sparkleSprite.decoding = "async";
+sparkleSprite.src = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(
+	SPARKLE_SVG,
+)}`;
+
+function clampNumber(value, min, max) {
+	return Math.min(max, Math.max(min, value));
+}
+
+function createSeededRandom(seed) {
+	let state = seed >>> 0;
+
+	return () => {
+		state += 0x6d2b79f5;
+		let result = Math.imul(state ^ (state >>> 15), 1 | state);
+
+		result ^=
+			result +
+			Math.imul(result ^ (result >>> 7), 61 | result);
+
+		return ((result ^ (result >>> 14)) >>> 0) / 4294967296;
+	};
+}
+
+function readCanvasNumber(canvas, datasetKey, fallback, min, max) {
+	const value = Number(canvas.dataset[datasetKey]);
+
+	if (!Number.isFinite(value)) {
+		return fallback;
+	}
+
+	return clampNumber(value, min, max);
+}
+
+function getHeroQuietZone(canvas) {
+	if (!heroCopy) {
+		return null;
+	}
+
+	const canvasRect = canvas.getBoundingClientRect();
+	const copyRect = heroCopy.getBoundingClientRect();
+
+	if (
+		!canvasRect.width ||
+		!canvasRect.height ||
+		!copyRect.width ||
+		!copyRect.height
+	) {
+		return null;
+	}
+
+	const paddingX = 56;
+	const paddingTop = 40;
+	const paddingBottom = 72;
+
+	return {
+		left: Math.max(0, copyRect.left - canvasRect.left - paddingX),
+		right: Math.min(
+			canvasRect.width,
+			copyRect.right - canvasRect.left + paddingX,
+		),
+		top: Math.max(0, copyRect.top - canvasRect.top - paddingTop),
+		bottom: Math.min(
+			canvasRect.height,
+			copyRect.bottom - canvasRect.top + paddingBottom,
+		),
+	};
+}
+
+function isInsideQuietZone(x, y, quietZone) {
+	if (!quietZone) {
+		return false;
+	}
+
+	return (
+		x >= quietZone.left &&
+		x <= quietZone.right &&
+		y >= quietZone.top &&
+		y <= quietZone.bottom
+	);
+}
+
+function getStarPlacementWeight(x, y, width, height, quietZone) {
+	const xRatio = width ? x / width : 0;
+	const yRatio = height ? y / height : 0;
+	const topBias = 1 - yRatio;
+	let weight = 0.6 + topBias * 0.7;
+
+	if (xRatio < 0.2 || xRatio > 0.8) {
+		weight += 0.18;
+	}
+
+	if (isInsideQuietZone(x, y, quietZone)) {
+		weight *= 0.07;
+	}
+
+	return clampNumber(weight, 0.04, 0.98);
+}
+
+function selectStarPosition(random, canvas, quietZone) {
+	const rect = canvas.getBoundingClientRect();
+	const width = rect.width || window.innerWidth || 1;
+	const height = rect.height || window.innerHeight || 1;
+	let bestCandidate = {
+		xRatio: clampNumber(random(), 0.02, 0.98),
+		yRatio: clampNumber(random(), 0.03, 0.97),
+		weight: 0,
+	};
+
+	for (
+		let attempt = 0;
+		attempt < HERO_STARS_MAX_PLACEMENT_ATTEMPTS;
+		attempt += 1
+	) {
+		const xRatio = clampNumber(random(), 0.02, 0.98);
+		const yRatio = clampNumber(random(), 0.03, 0.97);
+		const x = xRatio * width;
+		const y = yRatio * height;
+		const weight = getStarPlacementWeight(
+			x,
+			y,
+			width,
+			height,
+			quietZone,
+		);
+
+		if (weight > bestCandidate.weight) {
+			bestCandidate = { xRatio, yRatio, weight };
+		}
+
+		if (random() <= weight) {
+			return { xRatio, yRatio };
+		}
+	}
+
+	return {
+		xRatio: bestCandidate.xRatio,
+		yRatio: bestCandidate.yRatio,
+	};
+}
+
+function buildHeroStars(canvas) {
+	const count = Math.round(
+		readCanvasNumber(canvas, "starCount", 75, 0, 200),
+	);
+	const minSize = readCanvasNumber(canvas, "starMinSize", 2, 1, 24);
+	const maxSize = readCanvasNumber(
+		canvas,
+		"starMaxSize",
+		10,
+		minSize,
+		30,
+	);
+	const minOpacity = readCanvasNumber(
+		canvas,
+		"starMinOpacity",
+		0.3,
+		0.05,
+		0.5,
+	);
+	const maxOpacity = readCanvasNumber(
+		canvas,
+		"starMaxOpacity",
+		0.8,
+		minOpacity,
+		1,
+	);
+	const quietZone = getHeroQuietZone(canvas);
+	const random = createSeededRandom(HERO_STARS_SEED + count);
+
+	return Array.from({ length: count }, (_, index) => {
+		const position = selectStarPosition(random, canvas, quietZone);
+		const baseOpacity =
+			minOpacity + random() * (maxOpacity - minOpacity);
+		const minTwinkleOpacity = clampNumber(
+			baseOpacity * (0.4 + random() * 0.18),
+			0.08,
+			maxOpacity,
+		);
+		const maxTwinkleOpacity = clampNumber(
+			baseOpacity + 0.16 + random() * 0.22,
+			minTwinkleOpacity + 0.08,
+			1,
+		);
+
+		return {
+			xRatio: position.xRatio,
+			yRatio: position.yRatio,
+			size: minSize + random() * (maxSize - minSize),
+			opacity: baseOpacity,
+			minOpacity,
+			maxOpacity,
+			minTwinkleOpacity,
+			maxTwinkleOpacity,
+			twinkleRange: 0.22 + random() * 0.24,
+			twinklePhase: random() * Math.PI * 2,
+			twinkleSpeed: 0.0018,
+			// pulseScale: 0.88 + random() * 0.38,
+			pulseDrift: 0.0008 + random() * 0.0014,
+			shimmerOffset: random() * Math.PI * 2 + index * 0.35,
+			rotation: random() * Math.PI,
+		};
+	});
+}
+
+function drawHeroStars(timestamp = 0) {
+	if (
+		!heroStarfieldState ||
+		!sparkleSprite.complete ||
+		!sparkleSprite.naturalWidth
+	) {
+		return;
+	}
+
+	const { canvas, context, stars } = heroStarfieldState;
+	const rect = canvas.getBoundingClientRect();
+
+	if (!rect.width || !rect.height) {
+		return;
+	}
+
+	const dpr = Math.min(window.devicePixelRatio || 1, HERO_STARS_MAX_DPR);
+	const width = Math.round(rect.width * dpr);
+	const height = Math.round(rect.height * dpr);
+
+	if (canvas.width !== width || canvas.height !== height) {
+		canvas.width = width;
+		canvas.height = height;
+	}
+
+	context.setTransform(1, 0, 0, 1, 0, 0);
+	context.clearRect(0, 0, canvas.width, canvas.height);
+	context.scale(dpr, dpr);
+	context.imageSmoothingEnabled = true;
+	context.imageSmoothingQuality = "high";
+
+	for (const star of stars) {
+		const x = star.xRatio * rect.width;
+		const y = star.yRatio * rect.height;
+		const primaryPulse =
+			(Math.sin(
+				timestamp * star.twinkleSpeed +
+					star.twinklePhase,
+			) +
+				1) /
+			2;
+		const secondaryPulse =
+			(Math.sin(
+				timestamp * star.pulseDrift +
+					star.shimmerOffset,
+			) +
+				1) /
+			2;
+		const twinkleMix = clampNumber(
+			primaryPulse * 0.72 + secondaryPulse * 0.28,
+			0,
+			1,
+		);
+		const opacity =
+			star.minTwinkleOpacity +
+			(star.maxTwinkleOpacity - star.minTwinkleOpacity) *
+				twinkleMix;
+		const scale = 0.82;
+		const size = star.size * scale;
+
+		context.save();
+		context.translate(x, y);
+		context.rotate(star.rotation);
+		context.globalAlpha = opacity;
+		context.drawImage(
+			sparkleSprite,
+			-size / 2,
+			-size / 2,
+			size,
+			size,
+		);
+		context.restore();
+	}
+	context.globalAlpha = 1;
+}
+
+function stopHeroStarsAnimation() {
+	if (!heroStarfieldAnimationFrame) {
+		return;
+	}
+
+	window.cancelAnimationFrame(heroStarfieldAnimationFrame);
+	heroStarfieldAnimationFrame = 0;
+}
+
+function animateHeroStars(timestamp) {
+	if (!heroStarfieldState || heroStarfieldState.isReducedMotion) {
+		heroStarfieldAnimationFrame = 0;
+		return;
+	}
+
+	if (
+		!heroStarfieldState.lastFrameTime ||
+		timestamp - heroStarfieldState.lastFrameTime >=
+			1000 / HERO_STARS_ANIMATION_FPS
+	) {
+		heroStarfieldState.lastFrameTime = timestamp;
+		drawHeroStars(timestamp);
+	}
+
+	heroStarfieldAnimationFrame =
+		window.requestAnimationFrame(animateHeroStars);
+}
+
+function startHeroStarsAnimation() {
+	if (
+		!heroStarfieldState ||
+		heroStarfieldState.isReducedMotion ||
+		document.hidden ||
+		heroStarfieldAnimationFrame
+	) {
+		return;
+	}
+
+	heroStarfieldState.lastFrameTime = 0;
+	heroStarfieldAnimationFrame =
+		window.requestAnimationFrame(animateHeroStars);
+}
+
+function scheduleHeroStarsRender() {
+	if (!heroStarfieldState) {
+		return;
+	}
+
+	if (heroStarfieldFrame) {
+		window.cancelAnimationFrame(heroStarfieldFrame);
+	}
+
+	heroStarfieldFrame = window.requestAnimationFrame(() => {
+		heroStarfieldFrame = 0;
+		drawHeroStars(performance.now());
+	});
+}
+
+function syncHeroStarsMotionPreference() {
+	if (!heroStarfieldState) {
+		return;
+	}
+
+	heroStarfieldState.isReducedMotion = Boolean(
+		heroStarsMotionQuery?.matches,
+	);
+
+	if (heroStarfieldState.isReducedMotion) {
+		stopHeroStarsAnimation();
+		scheduleHeroStarsRender();
+		return;
+	}
+
+	startHeroStarsAnimation();
+}
+
+function handleHeroStarsResize() {
+	if (!heroStarfieldState) {
+		return;
+	}
+
+	heroStarfieldState.stars = buildHeroStars(heroStarsCanvas);
+	scheduleHeroStarsRender();
+}
+
+function handleHeroStarsVisibilityChange() {
+	if (!heroStarfieldState) {
+		return;
+	}
+
+	if (document.hidden) {
+		stopHeroStarsAnimation();
+		return;
+	}
+
+	handleHeroStarsResize();
+	startHeroStarsAnimation();
+}
+
+function initializeHeroStars() {
+	if (!heroStarsCanvas) {
+		return;
+	}
+
+	const context = heroStarsCanvas.getContext("2d", {
+		alpha: true,
+		desynchronized: true,
+	});
+
+	if (!context) {
+		return;
+	}
+
+	heroStarfieldState = {
+		canvas: heroStarsCanvas,
+		context,
+		stars: buildHeroStars(heroStarsCanvas),
+		isReducedMotion: Boolean(heroStarsMotionQuery?.matches),
+		lastFrameTime: 0,
+	};
+
+	if ("ResizeObserver" in window) {
+		const observer = new ResizeObserver(() => {
+			handleHeroStarsResize();
+		});
+
+		observer.observe(heroStarsCanvas);
+
+		if (heroCopy) {
+			observer.observe(heroCopy);
+		}
+
+		heroStarfieldState.observer = observer;
+	} else {
+		window.addEventListener("resize", handleHeroStarsResize, {
+			passive: true,
+		});
+	}
+
+	document.addEventListener(
+		"visibilitychange",
+		handleHeroStarsVisibilityChange,
+	);
+
+	if (heroStarsMotionQuery) {
+		heroStarsMotionQuery.addEventListener?.(
+			"change",
+			syncHeroStarsMotionPreference,
+		);
+	}
+
+	if (sparkleSprite.complete && sparkleSprite.naturalWidth) {
+		scheduleHeroStarsRender();
+		startHeroStarsAnimation();
+		return;
+	}
+
+	sparkleSprite.addEventListener(
+		"load",
+		() => {
+			scheduleHeroStarsRender();
+			startHeroStarsAnimation();
+		},
+		{ once: true },
+	);
+}
 
 function formatDate(value) {
 	if (!value) {
@@ -719,6 +1185,7 @@ async function loadDashboard() {
 	}
 }
 
+initializeHeroStars();
 loadRoadmap();
 loadTeamMembers();
 loadDashboard();
