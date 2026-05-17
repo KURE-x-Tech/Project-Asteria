@@ -33,7 +33,7 @@ jobs:
                   workflow_response=$(curl -fsSL \
                     -H "Accept: application/vnd.github+json" \
                     -H "Authorization: Bearer $GH_TOKEN" \
-                    "https://api.github.com/repos/$OWNER/$REPO_NAME/actions/runs?per_page=1")
+                    "https://api.github.com/repos/$OWNER/$REPO_NAME/actions/runs?per_page=5")
 
                   mkdir -p "$(dirname "$OUTPUT_PATH")"
 
@@ -49,6 +49,14 @@ jobs:
                         description: $repo.description,
                         defaultBranch: $repo.default_branch,
                         updatedAt: $repo.updated_at,
+                        activity: (($workflow.workflow_runs // []) | map({
+                          name: .name,
+                          status: .status,
+                          conclusion: .conclusion,
+                          branch: .head_branch,
+                          htmlUrl: .html_url,
+                          updatedAt: .updated_at
+                        })),
                         workflow: ((($workflow.workflow_runs[0] // null) | if . == null then null else {
                           name: .name,
                           status: .status,

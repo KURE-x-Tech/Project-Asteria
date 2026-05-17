@@ -8,10 +8,12 @@
   <meta name="description"
     content="Project Asteria is a Kingston University student team building scalable communication protocols for cislunar networks.">
   <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js" defer></script>
   <script>
     window.siteConfig = {
       latestWorkPath: "./data/latest-work.json",
-      teamMembersPath: "./data/team-members.json"
+      teamMembersPath: "./data/team-members.json",
+      roadmapPath: "./data/roadmap.json"
     };
   </script>
   <script src="script.js" defer></script>
@@ -55,6 +57,81 @@
         node-based
         network in space and around the moon. </p>
     </section>
+
+    <section class="architecture">
+      <h2 class="sectionheader">Architecture overview</h2>
+      <p class="sectiontext">Asteria is being shaped as a modular communications layer: endpoint nodes generate framed
+        traffic, a protocol core handles code allocation and message routing, and relay nodes keep the network resilient
+        across cislunar distance.</p>
+      <div class="architecture-list">
+        <div class="architecture-step">
+          <p class="step-index">01</p>
+          <div>
+            <h3 class="step-title">Endpoint nodes</h3>
+            <p class="step-text">Ground, orbital, and lunar systems package messages into a protocol-ready structure.
+            </p>
+          </div>
+        </div>
+        <div class="architecture-step">
+          <p class="step-index">02</p>
+          <div>
+            <h3 class="step-title">Protocol core</h3>
+            <p class="step-text">Spreading codes, scheduling, and addressing logic coordinate how traffic traverses the
+              network.</p>
+          </div>
+        </div>
+        <div class="architecture-step">
+          <p class="step-index">03</p>
+          <div>
+            <h3 class="step-title">Relay layer</h3>
+            <p class="step-text">Intermediary nodes extend coverage and keep communication paths redundant and scalable.
+            </p>
+          </div>
+        </div>
+        <div class="architecture-step">
+          <p class="step-index">04</p>
+          <div>
+            <h3 class="step-title">Mission services</h3>
+            <p class="step-text">Applications consume the network through a stable interface for telemetry,
+              coordination, and payload exchange.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="roadmap">
+      <h2 class="sectionheader">Roadmap</h2>
+      <p class="sectiontext" id="roadmap-intro">Loading roadmap...</p>
+      <div class="roadmap-workspace">
+        <div class="roadmap-canvas">
+          <div id="roadmap-mermaid" class="roadmap-mermaid" aria-live="polite">
+            <p class="loading-copy">Loading roadmap diagram...</p>
+          </div>
+        </div>
+        <div class="roadmap-sidebar">
+          <div class="roadmap-you-are-here" id="roadmap-current">
+            <p class="group-label">You are here</p>
+            <p class="loading-copy">Loading current milestone...</p>
+          </div>
+          <div class="roadmap-nav" id="roadmap-nav" aria-label="Roadmap milestones">
+            <p class="loading-copy">Loading roadmap milestones...</p>
+          </div>
+          <div class="roadmap-details" id="roadmap-details" aria-live="polite">
+            <p class="loading-copy">Loading milestone details...</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="projectsnippet">
+      <h2 class="sectionheader">Latest work</h2>
+      <p class="sectiontext">Recent workflow activity and implementation progress from the Spreading-Codes repository.
+      </p>
+      <section id="github-dashboard" aria-live="polite">
+        <p class="loading-copy">Loading latest work...</p>
+      </section>
+    </section>
+
     <section class="teaminfo">
       <h2 class="sectionheader">Meet the team</h2>
       <div class="team-group">

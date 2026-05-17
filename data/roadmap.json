@@ -1,0 +1,90 @@
+{
+	"intro": "A gateway-led implementation plan derived from the LSIS-AFS deliverables, progressing from architecture and code generation through validation, interoperability, and final submission.",
+	"currentMilestoneId": "encoding",
+	"milestones": [
+		{
+			"id": "foundation",
+			"period": "April 2026",
+			"title": "Foundation",
+			"shortLabel": "Foundation",
+			"status": "completed",
+			"gateways": ["Gateway 0", "Gateway 1"],
+			"summary": "Lock down architecture, compliance planning, and the spreading-code generation baseline.",
+			"deliverables": [
+				"System architecture and module boundaries",
+				"Development environment and validation approach",
+				"Spreading-code generation plan aligned to Annex data"
+			]
+		},
+		{
+			"id": "encoding",
+			"period": "May 2026",
+			"title": "Encoding",
+			"shortLabel": "Encoding",
+			"status": "current",
+			"gateways": ["Gateway 2", "Gateway 3"],
+			"summary": "Implement forward error correction and complete navigation message framing for valid 12-second frames.",
+			"deliverables": [
+				"BCH, LDPC, CRC, and interleaving infrastructure",
+				"Navigation frame assembly with sync pattern",
+				"Validation of frame timing and symbol counts"
+			]
+		},
+		{
+			"id": "signal-generation",
+			"period": "May-June 2026",
+			"title": "Signal generation",
+			"shortLabel": "Signal",
+			"status": "next",
+			"gateways": ["Gateway 4"],
+			"summary": "Turn encoded frames into synchronized baseband I/Q output ready for testing and comparison.",
+			"deliverables": [
+				"Tiered code assembly across primary, secondary, and tertiary layers",
+				"BPSK modulation for AFS-I and AFS-Q",
+				"Exportable binary and CSV signal files"
+			]
+		},
+		{
+			"id": "workshop-checkpoint",
+			"period": "Late June / Early July 2026",
+			"title": "Workshop checkpoint",
+			"shortLabel": "Workshop",
+			"status": "checkpoint",
+			"gateways": [],
+			"summary": "Prepare an interop-ready encode pipeline and demo narrative for the Goonhilly Earth Station workshop.",
+			"deliverables": [
+				"Stable encode path for demonstration",
+				"Interoperability test preparation",
+				"Workshop-ready explanation of the protocol stack"
+			]
+		},
+		{
+			"id": "decoding",
+			"period": "July 2026",
+			"title": "Decoding",
+			"shortLabel": "Decoding",
+			"status": "upcoming",
+			"gateways": ["Gateway 5", "Gateway 6"],
+			"summary": "Recover frames, parse messages, and validate round-trip decoding against the specification.",
+			"deliverables": [
+				"Frame synchronization and frame detection",
+				"Navigation message parsing and reconstruction",
+				"Round-trip validation against reference data"
+			]
+		},
+		{
+			"id": "integration",
+			"period": "August 2026",
+			"title": "Integration and submission",
+			"shortLabel": "Integration",
+			"status": "final",
+			"gateways": ["Gateway 7", "Gateway 8"],
+			"summary": "Complete end-to-end validation, documentation, and the final competition delivery before 31 August 2026.",
+			"deliverables": [
+				"Integrated validation across the full pipeline",
+				"Documentation, examples, and final polish",
+				"Submission package for the closing deadline"
+			]
+		}
+	]
+}
