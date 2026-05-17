@@ -1,43 +1,32 @@
 const ORG_NAME = "KURE-x-Tech";
 
-const dashboard =
-  document.getElementById(
-    "github-dashboard"
-  );
+const dashboard = document.getElementById("github-dashboard");
 
-async function fetchRepos(){
+async function fetchRepos() {
+	const response = await fetch(
+		`https://api.github.com/orgs/${ORG_NAME}/repos`,
+	);
 
-  const response =
-    await fetch(
-      `https://api.github.com/orgs/${ORG_NAME}/repos`
-    );
-
-  return await response.json();
+	return await response.json();
 }
 
-async function fetchLatestWorkflow(repoName){
+async function fetchLatestWorkflow(repoName) {
+	const response = await fetch(
+		`https://api.github.com/repos/${ORG_NAME}/${repoName}/actions/runs`,
+	);
 
-  const response =
-    await fetch(
-      `https://api.github.com/repos/${ORG_NAME}/${repoName}/actions/runs`
-    );
-
-  return await response.json();
+	return await response.json();
 }
 
-function createRepoCard(repo, workflow){
+function createRepoCard(repo, workflow) {
+	const latest = workflow.workflow_runs?.[0];
 
-  const latest =
-    workflow.workflow_runs?.[0];
+	const card = document.createElement("article");
 
-  const card =
-    document.createElement("article");
+	card.className = "repo-card";
 
-  card.className = "repo-card";
-
-  if(!latest){
-
-    card.innerHTML = `
+	if (!latest) {
+		card.innerHTML = `
       <h2>${repo.name}</h2>
 
       <p>No workflow runs found.</p>
@@ -47,10 +36,10 @@ function createRepoCard(repo, workflow){
       </a>
     `;
 
-    return card;
-  }
+		return card;
+	}
 
-  card.innerHTML = `
+	card.innerHTML = `
     <h2>${repo.name}</h2>
 
     <p>
@@ -81,50 +70,34 @@ function createRepoCard(repo, workflow){
     </a>
   `;
 
-  return card;
+	return card;
 }
 
-async function loadDashboard(){
+async function loadDashboard() {
+	dashboard.innerHTML = "";
 
-  dashboard.innerHTML = "";
+	try {
+		const repos = await fetchRepos();
 
-  try{
+		for (const repo of repos) {
+			const workflow = await fetchLatestWorkflow(repo.name);
 
-    const repos =
-      await fetchRepos();
+			const card = createRepoCard(repo, workflow);
 
-    for(const repo of repos){
-
-      const workflow =
-        await fetchLatestWorkflow(
-          repo.name
-        );
-
-      const card =
-        createRepoCard(
-          repo,
-          workflow
-        );
-
-      dashboard.appendChild(card);
-    }
-
-  }catch(error){
-
-    dashboard.innerHTML = `
+			dashboard.appendChild(card);
+		}
+	} catch (error) {
+		dashboard.innerHTML = `
       <p>
         Failed to load dashboard.
       </p>
     `;
 
-    console.error(error);
-  }
+		console.error(error);
+	}
 }
 
 loadDashboard();
 
 /* Optional auto refresh */
-setInterval(
-  loadDashboard,
-  60000
-);
+setInterval(loadDashboard, 60000);

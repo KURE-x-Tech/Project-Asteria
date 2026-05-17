@@ -5,148 +5,166 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Project Asteria</title>
+  <meta name="description"
+    content="Project Asteria is a Kingston University student team building scalable communication protocols for cislunar networks.">
   <link rel="stylesheet" href="style.css">
-  <script src="https://cdn.jsdelivr.net/npm/gh/mermaid-js/mermaid@10/dist/mermaid.min.js"></script>
   <script>
-    mermaid.initialize({ startOnLoad: true });
+    window.siteConfig = {
+      latestWorkPath: "./data/latest-work.json"
+    };
   </script>
-  <script src="./script.js"></script>
+  <script src="./script.js" defer></script>
 </head>
 
-<main>
+<body>
+  <main>
 
-  <section class="header">
-    <header>
-      <h1 class="title">Project Asteria</h1>
-    </header>
-  </section>
-
-  <section class="logos">
-    <a href="https://kingstonstudents.net/student-life/society/cyber/">
-      <img title="kutech" class="logo"
-        src="https://kingstonstudents.net/asset/Organisation/6733/kutech_logo_2026_full.png" />
-    </a>
-    <a href="https://kingstonstudents.net/student-life/society/kure/">
-      <img title="kure" class="logo" href="https://kingstonstudents.net/student-life/society/kure/"
-        src="https://kingstonstudents.net/asset/Organisation/7136/KURE_Logo.jpg" />
-    </a>
-  </section>
-
-  <section class="aboutus">
-    <h2 class="sectionheader">About us</h2>
-    <p class="sectiontext">We are a team of Kingston University students looking to improve our software development
-      skills. We come from varying backgrounds, from software development to rocket engineering. We're participating as
-      part of the LunaNET competition, kindly hosted by the <em>Consultative Committee for Space Data Systems
-        (CCSDS).</em></p>
-    <p>Our goal is to produce a working protocol for use in space communication allowing for a more scalable node-based
-      network in space and around the moon. </p>
-  </section>
-
-  <section class="projectsnippet">
-    <h2 class=sectionheader>Our latest work</h2>
-    <p class="sectiontext">Here's the results of our latest work: </p>
-    <section id="github-dashboard"></section>
-    <div>
-  </section>
-
-  <section class="teaminfo">
-    <h2 class="sectionheader">Meet the team</h2>
-    <div class="cards">
-      <div class="personcard">
-        <img title="Matt" class="profilepic" src="https://avatars.githubusercontent.com/u/153758412?v=4" />
-        <h3 class="personname">Matt Trollip</h3>
-        <p class="teamrole">Role within group</p>
-
-        <div>
-          <img title="Matt GitHub" class="githubLogo"
-            src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/github-white-icon.png" />
-          <a href="https://github.com/MattNotAvailable">Github</a>
-        </div>
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Kingston University x LunaNet</p>
+        <header class="header">
+          <h1 class="title">Project Asteria</h1>
+        </header>
+        <p class="lede">A student-built protocol initiative focused on scalable, node-based communication across space
+          and around the moon.</p>
       </div>
-      <div class="personcard">
-        <img title="Ansh" class="profilepic" src="NA" />
-        <h3 class="personname">Ansh Padam</h3>
-        <p class="teamrole">Role within group</p>
-        <div>
-          <img title="Ansh GitHub" class="githubLogo"
-            src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/github-white-icon.png" />
-          <a href="NA">Github (NA)</a>
-        </div>
-      </div>
-      <div class="personcard">
-        <img title="Jay" class="profilepic" src="https://avatars.githubusercontent.com/u/34739807?v=4" />
-        <h3 class="personname">Jay Bell</h3>
-        <p class="teamrole">Title</p>
-        <div>
-          <img title="Jay GitHub" class="githubLogo"
-            src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/github-white-icon.png" />
-          <a href="https://github.com/JayNightmare">Github</a>
-        </div>
-      </div>
-      <div class="personcard">
-        <img title="Ashley" class="profilepic" src="https://avatars.githubusercontent.com/u/250763613?v=4" />
-        <h3 class="personname">Ashley Farnworth</h3>
-        <p class="teamrole">Title</p>
-        <div>
-          <img title="Ashley GitHub" class="githubLogo"
-            src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/github-white-icon.png" />
-          <a href="https://github.com/AshleyFarn">Github</a>
-        </div>
-      </div>
-      <div class="personcard">
-        <img title="Nabeel" class="profilepic" src="NA" />
-        <h3 class="personname">Nabeel Naqvi</h3>
-        <p class="teamrole">Title</p>
-        <div>
-          <img title="Nabeel GitHub" class="githubLogo"
-            src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/github-white-icon.png" />
-          <a href="NA">Github (NA)</a>
-        </div>
-      </div>
-      <div class="personcard">
-        <img title="Vakaris" class="profilepic" src="NA" />
-        <h3 class="personname">Vakaris Steponavicius</h3>
-        <p class="teamrole">Title</p>
-        <div>
-          <img title="Vakaris GitHub" class="githubLogo"
-            src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/github-white-icon.png" />
-          <a href="NA">Github (NA)</a>
-        </div>
-      </div>
-      <div class="personcard">
-        <img title="Emily" class="profilepic" src="https://avatars.githubusercontent.com/u/274034161?v=4" />
-        <h3 class="personname">Emily Brown</h3>
-        <p class="teamrole">Title</p>
-        <div>
-          <img title="Emily GitHub" class="githubLogo"
-            src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/github-white-icon.png" />
-          <a href="https://github.com/3mi1y-8">Github</a>
-        </div>
-      </div>
-      <div class="personcard">
-        <img title="Trish" class="profilepic" src="NA" />
-        <h3 class="personname">Trish Fratangelo</h3>
-        <p class="teamrole">Title</p>
-        <div>
-          <img title="Trish GitHub" class="githubLogo"
-            src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/github-white-icon.png" />
-          <a class="githubLink" href="NA">Github (NA)</a>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <hr class="footerline">
+      <section class="logos" aria-label="Partner organisations">
+        <a href="https://kingstonstudents.net/student-life/society/cyber/" title="Open KU Tech society page"
+          target="_blank" rel="noopener noreferrer">
+          <img title="KU Tech logo" alt="KU Tech logo" class="logo"
+            src="https://kingstonstudents.net/asset/Organisation/6733/kutech_logo_2026_full.png" />
+        </a>
+        <a href="https://kingstonstudents.net/student-life/society/kure/" title="Open KURE society page" target="_blank"
+          rel="noopener noreferrer">
+          <img title="KURE logo" alt="KURE logo" class="logo"
+            src="https://kingstonstudents.net/asset/Organisation/7136/KURE_Logo.jpg" />
+        </a>
+      </section>
+    </section>
 
-  <section class="footer">
-    <div>
-      <img title="Organisation GitHub" class="githubLogo"
-        src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/github-white-icon.png" />
-      <a class="githubLink" href="https://github.com/KURE-x-Tech">Organisation Github Page</a>
-    </div>
-    <div>
-      <p>Group contact</p>
-    </div>
-  </section>
+    <section class="aboutus">
+      <h2 class="sectionheader">About us</h2>
+      <p class="sectiontext">We are a team of Kingston University students looking to improve our software development
+        skills. We come from varying backgrounds, from software development to rocket engineering. We're participating
+        as
+        part of the LunaNET competition, kindly hosted by the <em>Consultative Committee for Space Data Systems
+          (CCSDS).</em></p>
+      <p>Our goal is to produce a working protocol for use in space communication allowing for a more scalable
+        node-based
+        network in space and around the moon. </p>
+    </section>
 
-</main>
+    <section class="projectsnippet">
+      <h2 class="sectionheader">Latest work</h2>
+      <p class="sectiontext">A live project snapshot generated in GitHub Actions for the Speading-Codes repository.</p>
+      <section id="github-dashboard" aria-live="polite">
+        <p class="loading-copy">Loading latest work...</p>
+      </section>
+    </section>
+
+    <section class="teaminfo">
+      <h2 class="sectionheader">Meet the team</h2>
+      <div class="cards">
+        <a class="personcard" href="https://github.com/MattNotAvailable" title="Open Matt Trollip GitHub profile"
+          target="_blank" rel="noopener noreferrer">
+          <img title="Matt Trollip profile photo" alt="Matt Trollip profile photo" class="profilepic"
+            src="https://avatars.githubusercontent.com/u/153758412?v=4" />
+          <div class="person-summary">
+            <h3 class="personname">Matt Trollip</h3>
+            <p class="teamrole">Role within group</p>
+          </div>
+          <span class="personlink">GitHub</span>
+        </a>
+        <a class="personcard" href="https://www.linkedin.com/in/placeholder-profile/"
+          title="Open Ansh Padam LinkedIn profile placeholder" target="_blank" rel="noopener noreferrer">
+          <img title="Ansh Padam profile placeholder" alt="Ansh Padam profile placeholder" class="profilepic"
+            src="https://ui-avatars.com/api/?name=Ansh+Padam&background=10131d&color=e4e5ee" />
+          <div class="person-summary">
+            <h3 class="personname">Ansh Padam</h3>
+            <p class="teamrole">Role within group</p>
+          </div>
+          <span class="personlink">LinkedIn</span>
+        </a>
+        <a class="personcard" href="https://github.com/JayNightmare" title="Open Jay Bell GitHub profile"
+          target="_blank" rel="noopener noreferrer">
+          <img title="Jay Bell profile photo" alt="Jay Bell profile photo" class="profilepic"
+            src="https://avatars.githubusercontent.com/u/34739807?v=4" />
+          <div class="person-summary">
+            <h3 class="personname">Jay Bell</h3>
+            <p class="teamrole">Title</p>
+          </div>
+          <span class="personlink">GitHub</span>
+        </a>
+        <a class="personcard" href="https://github.com/AshleyFarn" title="Open Ashley Farnworth GitHub profile"
+          target="_blank" rel="noopener noreferrer">
+          <img title="Ashley Farnworth profile photo" alt="Ashley Farnworth profile photo" class="profilepic"
+            src="https://avatars.githubusercontent.com/u/250763613?v=4" />
+          <div class="person-summary">
+            <h3 class="personname">Ashley Farnworth</h3>
+            <p class="teamrole">Title</p>
+          </div>
+          <span class="personlink">GitHub</span>
+        </a>
+        <a class="personcard" href="https://www.linkedin.com/in/placeholder-profile/"
+          title="Open Nabeel Naqvi LinkedIn profile placeholder" target="_blank" rel="noopener noreferrer">
+          <img title="Nabeel Naqvi profile placeholder" alt="Nabeel Naqvi profile placeholder" class="profilepic"
+            src="https://ui-avatars.com/api/?name=Nabeel+Naqvi&background=10131d&color=e4e5ee" />
+          <div class="person-summary">
+            <h3 class="personname">Nabeel Naqvi</h3>
+            <p class="teamrole">Title</p>
+          </div>
+          <span class="personlink">LinkedIn</span>
+        </a>
+        <a class="personcard" href="https://www.linkedin.com/in/placeholder-profile/"
+          title="Open Vakaris Steponavicius LinkedIn profile placeholder" target="_blank" rel="noopener noreferrer">
+          <img title="Vakaris Steponavicius profile placeholder" alt="Vakaris Steponavicius profile placeholder"
+            class="profilepic"
+            src="https://ui-avatars.com/api/?name=Vakaris+Steponavicius&background=10131d&color=e4e5ee" />
+          <div class="person-summary">
+            <h3 class="personname">Vakaris Steponavicius</h3>
+            <p class="teamrole">Title</p>
+          </div>
+          <span class="personlink">LinkedIn</span>
+        </a>
+        <a class="personcard" href="https://github.com/3mi1y-8" title="Open Emily Brown GitHub profile" target="_blank"
+          rel="noopener noreferrer">
+          <img title="Emily Brown profile photo" alt="Emily Brown profile photo" class="profilepic"
+            src="https://avatars.githubusercontent.com/u/274034161?v=4" />
+          <div class="person-summary">
+            <h3 class="personname">Emily Brown</h3>
+            <p class="teamrole">Title</p>
+          </div>
+          <span class="personlink">GitHub</span>
+        </a>
+        <a class="personcard" href="https://www.linkedin.com/in/placeholder-profile/"
+          title="Open Trish Fratangelo LinkedIn profile placeholder" target="_blank" rel="noopener noreferrer">
+          <img title="Trish Fratangelo profile placeholder" alt="Trish Fratangelo profile placeholder"
+            class="profilepic" src="https://ui-avatars.com/api/?name=Trish+Fratangelo&background=10131d&color=e4e5ee" />
+          <div class="person-summary">
+            <h3 class="personname">Trish Fratangelo</h3>
+            <p class="teamrole">Title</p>
+          </div>
+          <span class="personlink">LinkedIn</span>
+        </a>
+      </div>
+    </section>
+
+    <hr class="footerline">
+
+    <section class="footer">
+      <div>
+        <img title="KURE-x-Tech GitHub mark" alt="KURE-x-Tech GitHub mark" class="githubLogo"
+          src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/github-white-icon.png" />
+        <a class="githubLink" href="https://github.com/KURE-x-Tech" title="Open KURE-x-Tech GitHub organisation"
+          target="_blank" rel="noopener noreferrer">Organisation GitHub</a>
+      </div>
+      <div>
+        <p>Group contact</p>
+      </div>
+    </section>
+
+  </main>
+</body>
+
+</html>

@@ -1,167 +1,300 @@
-* {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial,
-    sans-serif;
-  color: #c5c6ca;
-  background: #1d1e22;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* ── Reset & Base ─────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-.logo {
-  padding: 0px;
-  margin: 15px;
-  box-shadow: 10px 10px 10px -5px black;
-  border: 0px;
-  border-radius: 20px;
-  overflow: hidden;
-  width: 150px;
-  height: auto;
-  flex-shrink: 0;
+:root {
+  --bg: #08090e;
+  --text-primary: #e4e5ee;
+  --text-muted: #6b6d7e;
+  --accent: #7b6ef6;
+  --divider: rgba(255, 255, 255, 0.07);
+  --success: #3ecf8e;
+  --failure: #f66d6d;
+  --in-progress: #f6b26d;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: var(--bg);
+  color: var(--text-primary);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: opacity 0.15s ease;
+}
+
+a:hover {
+  opacity: 0.7;
 }
 
 em {
+  font-style: italic;
+  color: inherit;
   background: transparent;
 }
 
-p.sectiontext {
-  padding: 0px;
+/* ── Layout ───────────────────────────────────────────────── */
+main {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 48px 24px 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
 }
 
-h1 {
-  padding: 0px;
-  font-size: 60px;
-}
-
-h2 {
-  padding: 0px;
-}
-
-h3 {
-  margin: 5px 10px;
-  font-weight: bold;
+/* ── Top bar ──────────────────────────────────────────────── */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid var(--divider);
 }
 
 .header {
-  grid-area: Header;
+  display: contents;
 }
 
+h1.title {
+  font-size: clamp(26px, 5vw, 44px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--text-primary);
+  line-height: 1.1;
+}
+
+/* ── Logos ────────────────────────────────────────────────── */
 .logos {
-  grid-area: Logos;
-  margin: 0px;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
-  gap: 10px;
+  gap: 12px;
+  flex-shrink: 0;
 }
 
-.aboutus {
-  grid-area: AboutUs;
-  border: 5px outset grey;
-  border-radius: 10px;
-  padding: 10px;
-  margin: 10px;
-  box-shadow: 10px 10px 10px -5px black;
+.logo {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 8px;
+  opacity: 0.8;
+  transition: opacity 0.15s ease;
 }
 
-.projectsnippet {
-  grid-area: ProjectSnippet;
-  border: 5px outset grey;
-  border-radius: 10px;
-  padding: 10px;
-  margin: 10px;
-  box-shadow: 10px 10px 10px -5px black;
+.logo:hover {
+  opacity: 1;
 }
 
+/* ── Sections ─────────────────────────────────────────────── */
+.aboutus,
+.projectsnippet,
 .teaminfo {
-  grid-area: TeamInfo;
-  display: block;
-}
-
-.teaminfo p {
-  margin: 10px;
-}
-
-div.cards {
-  justify-content: left;
   display: flex;
-  flex-wrap: wrap;
-  margin: 0px;
+  flex-direction: column;
+  gap: 16px;
+}
+
+h2.sectionheader {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+p.sectiontext,
+.aboutus p,
+.projectsnippet p {
+  font-size: 15px;
+  color: var(--text-primary);
+  opacity: 0.82;
+  line-height: 1.8;
+}
+
+/* ── GitHub repo list ─────────────────────────────────────── */
+#github-dashboard {
+  display: flex;
+  flex-direction: column;
+}
+
+.repo-card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--divider);
+  background: transparent;
+}
+
+.repo-card:first-child {
+  border-top: 1px solid var(--divider);
+}
+
+.repo-card h2 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  background: transparent;
+}
+
+.repo-card p {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin: 0;
+  background: transparent;
+}
+
+.repo-card a {
+  font-size: 13px;
+  font-weight: 500;
+  margin-top: 6px;
+  background: transparent;
+}
+
+/* ── Team list ────────────────────────────────────────────── */
+div.cards {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
 }
 
 div.personcard {
-  border-radius: 10px;
-  border: 5px outset grey;
-  box-shadow: 10px 10px 10px -5px black;
-  margin: 10px;
-  width: 200px;
-  height: 305px;
-  overflow: hidden;
+  display: grid;
+  grid-template-columns: 40px 1fr auto;
+  grid-template-rows: auto auto;
+  align-items: center;
+  column-gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--divider);
+  background: transparent;
+}
+
+div.cards>div.personcard:first-child {
+  border-top: 1px solid var(--divider);
 }
 
 img.profilepic {
-  width: 100%;
-  height: auto;
-  margin: 0px;
-  padding: 0px;
-  border-bottom: 2px solid grey;
+  grid-column: 1;
+  grid-row: 1 / 3;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #1a1b24;
+}
+
+h3.personname {
+  grid-column: 2;
+  grid-row: 1;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  background: transparent;
+  margin: 0;
+}
+
+p.teamrole {
+  grid-column: 2;
+  grid-row: 2;
+  font-size: 12px;
+  color: var(--text-muted);
+  margin: 0;
+  background: transparent;
+}
+
+div.personcard>div {
+  grid-column: 3;
+  grid-row: 1 / 3;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
 }
 
 .githubLogo {
-  width: 20px;
-  height: 20px;
-  margin-left: 10px;
-  margin-right: 5px;
+  width: 14px;
+  height: 14px;
+  display: block;
+  filter: invert(1) brightness(0.55);
+  background: transparent;
 }
 
+div.personcard>div a {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-muted);
+  background: transparent;
+}
+
+div.personcard>div a:hover {
+  color: var(--text-primary);
+  opacity: 1;
+}
+
+/* ── Footer ───────────────────────────────────────────────── */
 .footer {
-  grid-area: Footer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding-top: 32px;
+  border-top: 1px solid var(--divider);
+  background: transparent;
 }
 
-.footerline{
-  grid-area: FooterLine;
-  border: none;
-  border-top: 2px solid grey;
-  margin: 20px 0px;
-  padding: 0px;
-  width: 100%;
+.footer div {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
 }
 
-@media screen and (min-width: 600px) {
+.footer p,
+.footer a,
+.footer .githubLink {
+  font-size: 13px;
+  color: var(--text-muted);
+  background: transparent;
+}
+
+.footer a:hover,
+.footer .githubLink:hover {
+  color: var(--text-primary);
+  opacity: 1;
+}
+
+.footerline {
+  display: none;
+}
+
+/* ── Responsive ───────────────────────────────────────────── */
+@media (max-width: 480px) {
   main {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
-    grid-template-rows: auto auto auto auto auto;
-
-    grid-template-areas:
-      "Header Logos Logos"
-      "ProjectSnippet AboutUs AboutUs"
-      "TeamInfo TeamInfo TeamInfo"
-      "FooterLine FooterLine FooterLine"
-      "Footer Footer Footer";
-  }
-}
-
-@media screen and (max-width: 600px) {
-  main {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto auto auto auto auto;
-
-    grid-template-areas:
-      "Header"
-      "Logos"
-      "AboutUs"
-      "ProjectSnippet"
-      "TeamInfo"
-      "FooterLine"
-      "Footer";
+    padding: 32px 16px 64px;
+    gap: 36px;
   }
 
-  h1 {
-    font-size: 50px;
-  }
-
-  .logos {
-    margin: 0px;
-    align-items: center;
-    justify-content: center;
+  .topbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
   }
 }
