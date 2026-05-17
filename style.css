@@ -1,300 +1,419 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
-/* ── Reset & Base ─────────────────────────────────────────── */
 *,
 *::before,
 *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 :root {
-  --bg: #08090e;
-  --text-primary: #e4e5ee;
-  --text-muted: #6b6d7e;
-  --accent: #7b6ef6;
-  --divider: rgba(255, 255, 255, 0.07);
-  --success: #3ecf8e;
-  --failure: #f66d6d;
-  --in-progress: #f6b26d;
+    --bg: #07080d;
+    --bg-glow: rgba(83, 125, 255, 0.12);
+    --surface-hover: rgba(255, 255, 255, 0.045);
+    --surface-soft: rgba(255, 255, 255, 0.03);
+    --text-primary: #edf0ff;
+    --text-muted: #8a90ab;
+    --accent: #8da2ff;
+    --accent-strong: #b7c3ff;
 }
 
 html {
-  scroll-behavior: smooth;
+    scroll-behavior: smooth;
 }
 
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  background: var(--bg);
-  color: var(--text-primary);
-  line-height: 1.6;
-  min-height: 100vh;
+    min-height: 100vh;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    color: var(--text-primary);
+    background:
+        radial-gradient(circle at top right, var(--bg-glow), transparent 28%),
+        radial-gradient(circle at top left, rgba(52, 79, 149, 0.14), transparent 22%),
+        var(--bg);
+    line-height: 1.65;
 }
 
 a {
-  color: var(--accent);
-  text-decoration: none;
-  transition: opacity 0.15s ease;
+    color: inherit;
+    text-decoration: none;
 }
 
-a:hover {
-  opacity: 0.7;
+img {
+    display: block;
 }
 
 em {
-  font-style: italic;
-  color: inherit;
-  background: transparent;
+    font-style: italic;
+    color: inherit;
 }
 
-/* ── Layout ───────────────────────────────────────────────── */
 main {
-  max-width: 760px;
-  margin: 0 auto;
-  padding: 48px 24px 80px;
-  display: flex;
-  flex-direction: column;
-  gap: 48px;
+    width: min(100%, 960px);
+    margin: 0 auto;
+    padding: 56px 24px 96px;
+    display: flex;
+    flex-direction: column;
+    gap: 64px;
 }
 
-/* ── Top bar ──────────────────────────────────────────────── */
-.topbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 24px;
-  padding-bottom: 32px;
-  border-bottom: 1px solid var(--divider);
+.hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 32px;
+    align-items: end;
 }
 
-.header {
-  display: contents;
+.hero-copy {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
 }
 
-h1.title {
-  font-size: clamp(26px, 5vw, 44px);
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  color: var(--text-primary);
-  line-height: 1.1;
+.eyebrow,
+.sectionheader {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-muted);
 }
 
-/* ── Logos ────────────────────────────────────────────────── */
+.title {
+    font-size: clamp(3rem, 9vw, 6rem);
+    line-height: 0.94;
+    letter-spacing: -0.06em;
+    font-weight: 700;
+}
+
+.lede {
+    max-width: 42rem;
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    color: var(--text-muted);
+}
+
 .logos {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.logos a {
+    opacity: 0.8;
+    transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.logos a:hover,
+.logos a:focus-visible {
+    opacity: 1;
+    transform: translateY(-2px);
 }
 
 .logo {
-  width: 48px;
-  height: 48px;
-  object-fit: cover;
-  border-radius: 8px;
-  opacity: 0.8;
-  transition: opacity 0.15s ease;
+    width: 52px;
+    height: 52px;
+    border-radius: 12px;
+    object-fit: cover;
 }
 
-.logo:hover {
-  opacity: 1;
-}
-
-/* ── Sections ─────────────────────────────────────────────── */
 .aboutus,
 .projectsnippet,
 .teaminfo {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 }
 
-h2.sectionheader {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-}
-
-p.sectiontext,
+.sectiontext,
 .aboutus p,
 .projectsnippet p {
-  font-size: 15px;
-  color: var(--text-primary);
-  opacity: 0.82;
-  line-height: 1.8;
+    max-width: 48rem;
+    font-size: 1rem;
+    color: var(--text-muted);
 }
 
-/* ── GitHub repo list ─────────────────────────────────────── */
 #github-dashboard {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.repo-card,
+.personcard {
+    background: transparent;
+    transition: background-color 180ms ease, transform 180ms ease, color 180ms ease;
 }
 
 .repo-card {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  padding: 16px 0;
-  border-bottom: 1px solid var(--divider);
-  background: transparent;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 18px;
+    padding: 18px 20px;
+    border-radius: 18px;
 }
 
-.repo-card:first-child {
-  border-top: 1px solid var(--divider);
+.repo-card:hover,
+.repo-card:focus-within {
+    background: var(--surface-soft);
+    transform: translateX(4px);
 }
 
-.repo-card h2 {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--text-primary);
-  background: transparent;
+.repo-copy {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
 }
 
-.repo-card p {
-  font-size: 13px;
-  color: var(--text-muted);
-  line-height: 1.5;
-  margin: 0;
-  background: transparent;
+.repo-title-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
 }
 
-.repo-card a {
-  font-size: 13px;
-  font-weight: 500;
-  margin-top: 6px;
-  background: transparent;
+.repo-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
 }
 
-/* ── Team list ────────────────────────────────────────────── */
-div.cards {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
+.repo-meta,
+.repo-description,
+.repo-updated,
+.loading-copy,
+.dashboard-message,
+.team-message {
+    font-size: 0.95rem;
+    color: var(--text-muted);
 }
 
-div.personcard {
-  display: grid;
-  grid-template-columns: 40px 1fr auto;
-  grid-template-rows: auto auto;
-  align-items: center;
-  column-gap: 16px;
-  padding: 14px 0;
-  border-bottom: 1px solid var(--divider);
-  background: transparent;
+.repo-links {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    flex-wrap: wrap;
 }
 
-div.cards>div.personcard:first-child {
-  border-top: 1px solid var(--divider);
+.repo-link {
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
 }
 
-img.profilepic {
-  grid-column: 1;
-  grid-row: 1 / 3;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  object-fit: cover;
-  background: #1a1b24;
+.repo-link:hover,
+.repo-link:focus-visible {
+    color: var(--accent-strong);
 }
 
-h3.personname {
-  grid-column: 2;
-  grid-row: 1;
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--text-primary);
-  background: transparent;
-  margin: 0;
+.cards {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
 }
 
-p.teamrole {
-  grid-column: 2;
-  grid-row: 2;
-  font-size: 12px;
-  color: var(--text-muted);
-  margin: 0;
-  background: transparent;
+.personcard {
+    display: grid;
+    grid-template-columns: 52px minmax(0, 1fr) auto;
+    gap: 16px;
+    align-items: center;
+    padding: 14px 18px;
+    border-radius: 18px;
 }
 
-div.personcard>div {
-  grid-column: 3;
-  grid-row: 1 / 3;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  background: transparent;
+.personcard:hover,
+.personcard:focus-visible {
+    background: var(--surface-hover);
+    transform: translateX(4px);
 }
 
-.githubLogo {
-  width: 14px;
-  height: 14px;
-  display: block;
-  filter: invert(1) brightness(0.55);
-  background: transparent;
+.profilepic {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    object-fit: cover;
+    background: rgba(255, 255, 255, 0.08);
 }
 
-div.personcard>div a {
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--text-muted);
-  background: transparent;
+.person-summary {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
 }
 
-div.personcard>div a:hover {
-  color: var(--text-primary);
-  opacity: 1;
+.personname {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
 }
 
-/* ── Footer ───────────────────────────────────────────────── */
+.teamrole {
+    font-size: 0.92rem;
+    color: var(--text-muted);
+}
+
+.teamrole[aria-label="lead"] {
+    background-image: linear-gradient(120deg,
+            #7ee7ff 0%,
+            #8da2ff 28%,
+            #c18dff 52%,
+            #7ee7ff 76%,
+            #8da2ff 100%);
+    background-size: 220% 220%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: lead-gradient-shift 5.5s linear infinite, lead-neon-glow 5.5s ease-in-out infinite;
+}
+
+.teamrole[aria-label="lead"] {
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+
+.person-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.personlink {
+    font-size: 0.76rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    white-space: nowrap;
+}
+
+.personlink:hover,
+.personlink:focus-visible {
+    color: var(--accent-strong);
+}
+
 .footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  flex-wrap: wrap;
-  padding-top: 32px;
-  border-top: 1px solid var(--divider);
-  background: transparent;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    padding-top: 8px;
 }
 
 .footer div {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: transparent;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.githubLogo {
+    width: 15px;
+    height: 15px;
+    filter: invert(1) brightness(0.7);
 }
 
 .footer p,
-.footer a,
-.footer .githubLink {
-  font-size: 13px;
-  color: var(--text-muted);
-  background: transparent;
+.githubLink {
+    font-size: 0.92rem;
+    color: var(--text-muted);
 }
 
-.footer a:hover,
-.footer .githubLink:hover {
-  color: var(--text-primary);
-  opacity: 1;
+.githubLink:hover,
+.githubLink:focus-visible {
+    color: var(--text-primary);
 }
 
 .footerline {
-  display: none;
+    display: none;
 }
 
-/* ── Responsive ───────────────────────────────────────────── */
-@media (max-width: 480px) {
-  main {
-    padding: 32px 16px 64px;
-    gap: 36px;
-  }
+.personcard:focus-visible,
+.repo-link:focus-visible,
+.personlink:focus-visible,
+.logos a:focus-visible,
+.githubLink:focus-visible {
+    outline: 2px solid rgba(141, 162, 255, 0.45);
+    outline-offset: 4px;
+}
 
-  .topbar {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 16px;
-  }
+@keyframes lead-gradient-shift {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes lead-neon-glow {
+    0% {
+        text-shadow: 0 0 6px rgba(126, 231, 255, 0.18), 0 0 14px rgba(141, 162, 255, 0.14);
+    }
+
+    33% {
+        text-shadow: 0 0 7px rgba(141, 162, 255, 0.24), 0 0 16px rgba(193, 141, 255, 0.18);
+    }
+
+    66% {
+        text-shadow: 0 0 7px rgba(193, 141, 255, 0.24), 0 0 16px rgba(126, 231, 255, 0.18);
+    }
+
+    100% {
+        text-shadow: 0 0 6px rgba(126, 231, 255, 0.18), 0 0 14px rgba(141, 162, 255, 0.14);
+    }
+}
+
+@media (max-width: 720px) {
+    main {
+        padding: 40px 18px 72px;
+        gap: 48px;
+    }
+
+    .hero {
+        grid-template-columns: 1fr;
+    }
+
+    .repo-card {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .personcard {
+        grid-template-columns: 52px minmax(0, 1fr);
+    }
+
+    .person-actions {
+        grid-column: 2;
+        justify-content: flex-start;
+    }
+}
+
+@media (max-width: 480px) {
+    .title {
+        font-size: clamp(2.6rem, 16vw, 4rem);
+    }
+
+    .personcard {
+        grid-template-columns: 44px minmax(0, 1fr);
+        padding: 12px 14px;
+    }
+
+    .profilepic {
+        width: 44px;
+        height: 44px;
+    }
+
+    .repo-card {
+        padding: 16px 14px;
+    }
 }

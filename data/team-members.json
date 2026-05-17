@@ -1,0 +1,94 @@
+{
+	"members": [
+		{
+			"name": "Matt Trollip",
+			"role": "Project Lead",
+			"roleLabel": "lead",
+			"imageUrl": "https://avatars.githubusercontent.com/u/153758412?v=4",
+			"links": {
+				"github": "https://github.com/MattNotAvailable",
+				"linkedin": "https://www.linkedin.com/in/placeholder-profile/"
+			}
+		},
+		{
+			"name": "Jay Bell",
+			"role": "Tech Lead",
+			"roleLabel": "lead",
+			"imageUrl": "https://avatars.githubusercontent.com/u/34739807?v=4",
+			"links": {
+				"github": "https://github.com/JayNightmare",
+				"linkedin": "https://www.linkedin.com/in/jordan-s-bell/"
+			}
+		},
+		{
+			"name": "Ansh Padam",
+			"role": "Developer",
+			"roleLabel": "developer",
+			"imageUrl": "",
+			"links": {
+				"github": "https://github.com/placeholder-profile",
+				"linkedin": "https://www.linkedin.com/in/placeholder-profile/"
+			}
+		},
+		{
+			"name": "Ashley Farnworth",
+			"role": "Developer",
+			"roleLabel": "developer",
+			"imageUrl": "https://avatars.githubusercontent.com/u/250763613?v=4",
+			"links": {
+				"github": "https://github.com/AshleyFarn",
+				"linkedin": "https://www.linkedin.com/in/placeholder-profile/"
+			}
+		},
+		{
+			"name": "Koki",
+			"role": "Developer",
+			"roleLabel": "developer",
+			"imageUrl": "https://avatars.githubusercontent.com/u/183098799?v=4",
+			"links": {
+				"github": "https://github.com/key0406",
+				"linkedin": "https://www.linkedin.com/in/placeholder-profile/"
+			}
+		},
+		{
+			"name": "Nabeel Naqvi",
+			"role": "Rocket Engineer",
+			"roleLabel": "rocket engineer",
+			"imageUrl": "",
+			"links": {
+				"github": "https://github.com/placeholder-profile",
+				"linkedin": "https://www.linkedin.com/in/placeholder-profile/"
+			}
+		},
+		{
+			"name": "Vakaris Steponavicius",
+			"role": "Rocket Engineer",
+			"roleLabel": "rocket engineer",
+			"imageUrl": "",
+			"links": {
+				"github": "https://github.com/placeholder-profile",
+				"linkedin": "https://www.linkedin.com/in/placeholder-profile/"
+			}
+		},
+		{
+			"name": "Emily Brown",
+			"role": "Rocket Engineer",
+			"roleLabel": "rocket engineer",
+			"imageUrl": "https://avatars.githubusercontent.com/u/274034161?v=4",
+			"links": {
+				"github": "https://github.com/3mi1y-8",
+				"linkedin": "https://www.linkedin.com/in/placeholder-profile/"
+			}
+		},
+		{
+			"name": "Trish Fratangelo",
+			"role": "Rocket Engineer",
+			"roleLabel": "rocket engineer",
+			"imageUrl": "",
+			"links": {
+				"github": "https://github.com/placeholder-profile",
+				"linkedin": "https://www.linkedin.com/in/placeholder-profile/"
+			}
+		}
+	]
+}

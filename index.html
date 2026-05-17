@@ -10,10 +10,11 @@
   <link rel="stylesheet" href="style.css">
   <script>
     window.siteConfig = {
-      latestWorkPath: "./data/latest-work.json"
+      latestWorkPath: "./data/latest-work.json",
+      teamMembersPath: "./data/team-members.json"
     };
   </script>
-  <script src="./script.js" defer></script>
+  <script src="script.js" defer></script>
 </head>
 
 <body>
@@ -54,100 +55,20 @@
         node-based
         network in space and around the moon. </p>
     </section>
-
-    <section class="projectsnippet">
-      <h2 class="sectionheader">Latest work</h2>
-      <p class="sectiontext">A live project snapshot generated in GitHub Actions for the Speading-Codes repository.</p>
-      <section id="github-dashboard" aria-live="polite">
-        <p class="loading-copy">Loading latest work...</p>
-      </section>
-    </section>
-
-    <section class="teaminfo">
-      <h2 class="sectionheader">Meet the team</h2>
-      <div class="cards">
-        <a class="personcard" href="https://github.com/MattNotAvailable" title="Open Matt Trollip GitHub profile"
-          target="_blank" rel="noopener noreferrer">
-          <img title="Matt Trollip profile photo" alt="Matt Trollip profile photo" class="profilepic"
-            src="https://avatars.githubusercontent.com/u/153758412?v=4" />
-          <div class="person-summary">
-            <h3 class="personname">Matt Trollip</h3>
-            <p class="teamrole">Role within group</p>
-          </div>
-          <span class="personlink">GitHub</span>
-        </a>
-        <a class="personcard" href="https://www.linkedin.com/in/placeholder-profile/"
-          title="Open Ansh Padam LinkedIn profile placeholder" target="_blank" rel="noopener noreferrer">
-          <img title="Ansh Padam profile placeholder" alt="Ansh Padam profile placeholder" class="profilepic"
-            src="https://ui-avatars.com/api/?name=Ansh+Padam&background=10131d&color=e4e5ee" />
-          <div class="person-summary">
-            <h3 class="personname">Ansh Padam</h3>
-            <p class="teamrole">Role within group</p>
-          </div>
-          <span class="personlink">LinkedIn</span>
-        </a>
-        <a class="personcard" href="https://github.com/JayNightmare" title="Open Jay Bell GitHub profile"
-          target="_blank" rel="noopener noreferrer">
-          <img title="Jay Bell profile photo" alt="Jay Bell profile photo" class="profilepic"
-            src="https://avatars.githubusercontent.com/u/34739807?v=4" />
-          <div class="person-summary">
-            <h3 class="personname">Jay Bell</h3>
-            <p class="teamrole">Title</p>
-          </div>
-          <span class="personlink">GitHub</span>
-        </a>
-        <a class="personcard" href="https://github.com/AshleyFarn" title="Open Ashley Farnworth GitHub profile"
-          target="_blank" rel="noopener noreferrer">
-          <img title="Ashley Farnworth profile photo" alt="Ashley Farnworth profile photo" class="profilepic"
-            src="https://avatars.githubusercontent.com/u/250763613?v=4" />
-          <div class="person-summary">
-            <h3 class="personname">Ashley Farnworth</h3>
-            <p class="teamrole">Title</p>
-          </div>
-          <span class="personlink">GitHub</span>
-        </a>
-        <a class="personcard" href="https://www.linkedin.com/in/placeholder-profile/"
-          title="Open Nabeel Naqvi LinkedIn profile placeholder" target="_blank" rel="noopener noreferrer">
-          <img title="Nabeel Naqvi profile placeholder" alt="Nabeel Naqvi profile placeholder" class="profilepic"
-            src="https://ui-avatars.com/api/?name=Nabeel+Naqvi&background=10131d&color=e4e5ee" />
-          <div class="person-summary">
-            <h3 class="personname">Nabeel Naqvi</h3>
-            <p class="teamrole">Title</p>
-          </div>
-          <span class="personlink">LinkedIn</span>
-        </a>
-        <a class="personcard" href="https://www.linkedin.com/in/placeholder-profile/"
-          title="Open Vakaris Steponavicius LinkedIn profile placeholder" target="_blank" rel="noopener noreferrer">
-          <img title="Vakaris Steponavicius profile placeholder" alt="Vakaris Steponavicius profile placeholder"
-            class="profilepic"
-            src="https://ui-avatars.com/api/?name=Vakaris+Steponavicius&background=10131d&color=e4e5ee" />
-          <div class="person-summary">
-            <h3 class="personname">Vakaris Steponavicius</h3>
-            <p class="teamrole">Title</p>
-          </div>
-          <span class="personlink">LinkedIn</span>
-        </a>
-        <a class="personcard" href="https://github.com/3mi1y-8" title="Open Emily Brown GitHub profile" target="_blank"
-          rel="noopener noreferrer">
-          <img title="Emily Brown profile photo" alt="Emily Brown profile photo" class="profilepic"
-            src="https://avatars.githubusercontent.com/u/274034161?v=4" />
-          <div class="person-summary">
-            <h3 class="personname">Emily Brown</h3>
-            <p class="teamrole">Title</p>
-          </div>
-          <span class="personlink">GitHub</span>
-        </a>
-        <a class="personcard" href="https://www.linkedin.com/in/placeholder-profile/"
-          title="Open Trish Fratangelo LinkedIn profile placeholder" target="_blank" rel="noopener noreferrer">
-          <img title="Trish Fratangelo profile placeholder" alt="Trish Fratangelo profile placeholder"
-            class="profilepic" src="https://ui-avatars.com/api/?name=Trish+Fratangelo&background=10131d&color=e4e5ee" />
-          <div class="person-summary">
-            <h3 class="personname">Trish Fratangelo</h3>
-            <p class="teamrole">Title</p>
-          </div>
-          <span class="personlink">LinkedIn</span>
-        </a>
-      </div>
+    <div class="cards" id="team-members" aria-live="polite">
+      <p class="loading-copy">Loading team members...</p>
+      </a>
+      <a class="personcard" href="https://www.linkedin.com/in/placeholder-profile/"
+        title="Open Trish Fratangelo LinkedIn profile placeholder" target="_blank" rel="noopener noreferrer">
+        <img title="Trish Fratangelo profile placeholder" alt="Trish Fratangelo profile placeholder" class="profilepic"
+          src="https://ui-avatars.com/api/?name=Trish+Fratangelo&background=10131d&color=e4e5ee" />
+        <div class="person-summary">
+          <h3 class="personname">Trish Fratangelo</h3>
+          <p class="teamrole" aria-label="rocket engineer">Rocket Engineer</p>
+        </div>
+        <span class="personlink">LinkedIn</span>
+      </a>
+    </div>
     </section>
 
     <hr class="footerline">
