@@ -3,7 +3,7 @@
 		{
 			"name": "Matt Trollip",
 			"role": "Project Lead",
-			"roleLabel": "lead",
+			"roleLabel": "p-lead",
 			"imageUrl": "https://avatars.githubusercontent.com/u/153758412?v=4",
 			"links": {
 				"github": "https://github.com/MattNotAvailable",
@@ -13,7 +13,7 @@
 		{
 			"name": "Jay Bell",
 			"role": "Tech Lead",
-			"roleLabel": "lead",
+			"roleLabel": "t-lead",
 			"imageUrl": "https://avatars.githubusercontent.com/u/34739807?v=4",
 			"links": {
 				"github": "https://github.com/JayNightmare",
@@ -24,9 +24,9 @@
 			"name": "Ansh Padam",
 			"role": "Developer",
 			"roleLabel": "developer",
-			"imageUrl": "",
+			"imageUrl": "https://avatars.githubusercontent.com/u/55919825?v=4",
 			"links": {
-				"github": "https://github.com/placeholder-profile",
+				"github": "https://github.com/Dynamic-Codes",
 				"linkedin": "https://www.linkedin.com/in/placeholder-profile/"
 			}
 		},
@@ -90,5 +90,44 @@
 				"linkedin": "https://www.linkedin.com/in/placeholder-profile/"
 			}
 		}
-	]
+	],
+	"collaborators": [
+		{
+			"name": "Dr. Christos Politis",
+			"role": "Collaborator",
+			"roleLabel": "collaborator",
+			"imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcROLtLGrPe1_4rAwIyxjl-L70w1kJE_k0Kzng&s",
+			"links": {
+				"github": "https://github.com/placeholder-profile",
+				"linkedin": "https://www.linkedin.com/in/placeholder-profile/"
+			}
+		},
+		{
+			"name": "Dr. Gordon Johnson",
+			"role": "Collaborator",
+			"roleLabel": "collaborator",
+			"imageUrl": "https://i1.rgstatic.net/ii/profile.image/11431281274349211-1724937502558_Q512/Gordon-Johnson-5.jpg",
+			"links": {
+				"github": "https://github.com/placeholder-profile",
+				"linkedin": "https://www.linkedin.com/in/placeholder-profile/"
+			}
+		}
+	],
+	"roles": {
+		"p-lead": "Project Lead",
+		"t-lead": "Tech Lead",
+		"developer": "Developer",
+		"rocket engineer": "Rocket Engineer",
+		"collaborator": "Collaborator"
+	},
+	"roleColors": {
+		"lead": "#FFD700",
+		"developer": "#1E90FF",
+		"rocket engineer": "#32CD32",
+		"collaborator": "#FF69B4"
+	},
+	"socialIcons": {
+		"github": "https://www.svgrepo.com/show/475654/github-color.svg",
+		"linkedin": "https://www.svgrepo.com/show/475661/linkedin-color.svg"
+	}
 }

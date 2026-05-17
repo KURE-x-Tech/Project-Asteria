@@ -1,6 +1,7 @@
 const REPO_NAME = "Speading-Codes";
 const dashboard = document.getElementById("github-dashboard");
 const teamMembers = document.getElementById("team-members");
+const teamCollaborators = document.getElementById("team-collaborators");
 const latestWorkPath =
 	window.siteConfig?.latestWorkPath || "./data/latest-work.json";
 const teamMembersPath =
@@ -36,30 +37,66 @@ function createExternalLink(href, label, title, className) {
 	link.target = "_blank";
 	link.rel = "noopener noreferrer";
 	link.title = title;
-	link.textContent = label;
+
+	if (label) {
+		link.textContent = label;
+	}
 
 	return link;
 }
 
-function normalizeTeamMembers(payload) {
-	if (Array.isArray(payload?.members)) {
-		return payload.members;
+function createIconImage(label, src) {
+	const image = document.createElement("img");
+
+	image.className = "social-icon";
+	image.src = src;
+	image.alt = `${label} icon`;
+	image.title = `${label} icon`;
+
+	return image;
+}
+
+function normalizeTeamPayload(payload) {
+	if (payload && Array.isArray(payload.members)) {
+		return {
+			members: payload.members,
+			collaborators: Array.isArray(payload.collaborators)
+				? payload.collaborators
+				: [],
+			roles: payload.roles || {},
+			roleColors: payload.roleColors || {},
+			socialIcons: payload.socialIcons || {},
+		};
 	}
 
 	if (payload && typeof payload === "object") {
-		return Object.entries(payload).map(([name, member]) => ({
-			name,
-			role: member.role,
-			roleLabel: member.roleLabel,
-			imageUrl: member.imageUrl,
-			links: {
-				github: member.githubUrl,
-				linkedin: member.linkedinUrl,
-			},
-		}));
+		return {
+			members: Object.entries(payload).map(
+				([name, member]) => ({
+					name,
+					role: member.role,
+					roleLabel: member.roleLabel,
+					imageUrl: member.imageUrl,
+					links: {
+						github: member.githubUrl,
+						linkedin: member.linkedinUrl,
+					},
+				}),
+			),
+			collaborators: [],
+			roles: {},
+			roleColors: {},
+			socialIcons: {},
+		};
 	}
 
-	return [];
+	return {
+		members: [],
+		collaborators: [],
+		roles: {},
+		roleColors: {},
+		socialIcons: {},
+	};
 }
 
 function createRepoCard(payload) {
@@ -121,16 +158,44 @@ function createRepoCard(payload) {
 	return article;
 }
 
-function createTeamCard(member) {
+function createSocialLink(name, platform, href, iconMap) {
+	if (!href) {
+		return null;
+	}
+
+	const label = platform === "github" ? "GitHub" : "LinkedIn";
+	const link = createExternalLink(
+		href,
+		"",
+		`Open ${name} ${label} profile`,
+		"personlink",
+	);
+	const icon = iconMap?.[platform];
+	const text = document.createElement("span");
+
+	text.className = "personlink-label";
+	text.textContent = label;
+
+	if (icon) {
+		link.appendChild(createIconImage(label, icon));
+	}
+
+	link.appendChild(text);
+
+	return link;
+}
+
+function createTeamCard(member, teamMeta) {
 	const name = member.name;
-	const githubUrl = member.links?.github;
-	const linkedinUrl = member.links?.linkedin;
 	const article = document.createElement("article");
 	const image = document.createElement("img");
 	const summary = document.createElement("div");
 	const title = document.createElement("h3");
 	const role = document.createElement("p");
 	const actions = document.createElement("div");
+	const roleKey = member.roleLabel || member.role.toLowerCase();
+	const roleText = teamMeta.roles?.[roleKey] || member.role;
+	const roleColor = teamMeta.roleColors?.[roleKey];
 
 	article.className = "personcard";
 	image.className = "profilepic";
@@ -142,34 +207,34 @@ function createTeamCard(member) {
 	title.className = "personname";
 	title.textContent = name;
 	role.className = "teamrole";
-	role.textContent = member.role;
-	role.setAttribute(
-		"aria-label",
-		member.roleLabel || member.role.toLowerCase(),
-	);
+	role.textContent = roleText;
+	role.setAttribute("aria-label", roleKey);
+
+	if (roleColor && !roleKey.includes("lead")) {
+		role.style.color = roleColor;
+	}
 
 	actions.className = "person-actions";
 
-	if (githubUrl) {
-		actions.appendChild(
-			createExternalLink(
-				githubUrl,
-				"GitHub",
-				`Open ${name} GitHub profile`,
-				"personlink",
-			),
-		);
+	const githubLink = createSocialLink(
+		name,
+		"github",
+		member.links?.github,
+		teamMeta.socialIcons,
+	);
+	const linkedinLink = createSocialLink(
+		name,
+		"linkedin",
+		member.links?.linkedin,
+		teamMeta.socialIcons,
+	);
+
+	if (githubLink) {
+		actions.appendChild(githubLink);
 	}
 
-	if (linkedinUrl) {
-		actions.appendChild(
-			createExternalLink(
-				linkedinUrl,
-				"LinkedIn",
-				`Open ${name} LinkedIn profile`,
-				"personlink",
-			),
-		);
+	if (linkedinLink) {
+		actions.appendChild(linkedinLink);
 	}
 
 	summary.append(title, role);
@@ -190,8 +255,8 @@ function renderDashboardMessage(message) {
 	dashboard.replaceChildren(paragraph);
 }
 
-function renderTeamMessage(message) {
-	if (!teamMembers) {
+function renderTeamMessage(target, message) {
+	if (!target) {
 		return;
 	}
 
@@ -199,14 +264,25 @@ function renderTeamMessage(message) {
 
 	paragraph.className = "team-message";
 	paragraph.textContent = message;
-	teamMembers.replaceChildren(paragraph);
+	target.replaceChildren(paragraph);
 }
 
-async function loadTeamMembers() {
-	if (!teamMembers) {
+function renderTeamGroup(target, people, emptyMessage, teamMeta) {
+	if (!target) {
 		return;
 	}
 
+	if (!people.length) {
+		renderTeamMessage(target, emptyMessage);
+		return;
+	}
+
+	const cards = people.map((member) => createTeamCard(member, teamMeta));
+
+	target.replaceChildren(...cards);
+}
+
+async function loadTeamMembers() {
 	try {
 		const response = await fetch(
 			`${teamMembersPath}?t=${Date.now()}`,
@@ -222,20 +298,28 @@ async function loadTeamMembers() {
 		}
 
 		const payload = await response.json();
-		const members = normalizeTeamMembers(payload);
+		const teamMeta = normalizeTeamPayload(payload);
 
-		if (!members.length) {
-			throw new Error(
-				"No team members found in data payload.",
-			);
-		}
-
-		const cards = members.map((member) => createTeamCard(member));
-
-		teamMembers.replaceChildren(...cards);
+		renderTeamGroup(
+			teamMembers,
+			teamMeta.members,
+			"Team members are temporarily unavailable. Update data/team-members.json to refresh this section.",
+			teamMeta,
+		);
+		renderTeamGroup(
+			teamCollaborators,
+			teamMeta.collaborators,
+			"No collaborators have been added yet.",
+			teamMeta,
+		);
 	} catch (error) {
 		renderTeamMessage(
+			teamMembers,
 			"Team members are temporarily unavailable. Update data/team-members.json to refresh this section.",
+		);
+		renderTeamMessage(
+			teamCollaborators,
+			"Collaborators are temporarily unavailable. Update data/team-members.json to refresh this section.",
 		);
 		console.error(error);
 	}
