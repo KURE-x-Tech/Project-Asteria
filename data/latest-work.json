@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
 	"generatedAt": "2026-05-17T15:51:39Z",
 	"repo": {
 		"name": "Spreading-Codes",
@@ -25,4 +26,22 @@
 			"updatedAt": "2026-05-15T09:25:34Z"
 		}
 	}
+=======
+  "generatedAt": "2026-05-17T16:12:22Z",
+  "repo": {
+    "name": "Spreading-Codes",
+    "htmlUrl": "https://github.com/KURE-x-Tech/Spreading-Codes",
+    "description": "Contains the spreading codes used in the LunaNet protocol",
+    "defaultBranch": "main",
+    "updatedAt": "2026-05-06T16:19:34Z",
+    "workflow": {
+      "name": "Scheduled",
+      "status": "completed",
+      "conclusion": "success",
+      "branch": "main",
+      "htmlUrl": "https://github.com/KURE-x-Tech/Spreading-Codes/actions/runs/25910418384",
+      "updatedAt": "2026-05-15T09:25:34Z"
+    }
+  }
+>>>>>>> d2173952241b6def59f9a08c5de71b3a83a56ffd
 }
