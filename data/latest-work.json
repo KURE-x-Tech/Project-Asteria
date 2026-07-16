@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-16T22:49:51Z",
+  "generatedAt": "2026-07-16T23:51:13Z",
   "repo": {
     "name": "Spreading-Codes",
     "htmlUrl": "https://github.com/KURE-x-Tech/Spreading-Codes",
@@ -7,6 +7,22 @@
     "defaultBranch": "main",
     "updatedAt": "2026-07-07T14:51:34Z",
     "activity": [
+      {
+        "name": "Running Copilot Code Review",
+        "status": "completed",
+        "conclusion": "failure",
+        "branch": "feature/gateway5-stage1-koki",
+        "htmlUrl": "https://github.com/KURE-x-Tech/Spreading-Codes/actions/runs/29542463329",
+        "updatedAt": "2026-07-16T23:34:46Z"
+      },
+      {
+        "name": "PR #9",
+        "status": "completed",
+        "conclusion": "success",
+        "branch": "refs/pull/9/head",
+        "htmlUrl": "https://github.com/KURE-x-Tech/Spreading-Codes/actions/runs/29542460202",
+        "updatedAt": "2026-07-16T23:35:26Z"
+      },
       {
         "name": "Scheduled",
         "status": "completed",
@@ -30,31 +46,15 @@
         "branch": "main",
         "htmlUrl": "https://github.com/KURE-x-Tech/Spreading-Codes/actions/runs/28871326218",
         "updatedAt": "2026-07-07T13:51:27Z"
-      },
-      {
-        "name": "Push on main",
-        "status": "completed",
-        "conclusion": "success",
-        "branch": "main",
-        "htmlUrl": "https://github.com/KURE-x-Tech/Spreading-Codes/actions/runs/28870532434",
-        "updatedAt": "2026-07-07T13:39:30Z"
-      },
-      {
-        "name": "PR #2",
-        "status": "completed",
-        "conclusion": "success",
-        "branch": "refs/pull/2/head",
-        "htmlUrl": "https://github.com/KURE-x-Tech/Spreading-Codes/actions/runs/28867859378",
-        "updatedAt": "2026-07-07T12:58:18Z"
       }
     ],
     "workflow": {
-      "name": "Scheduled",
+      "name": "Running Copilot Code Review",
       "status": "completed",
-      "conclusion": "success",
-      "branch": "main",
-      "htmlUrl": "https://github.com/KURE-x-Tech/Spreading-Codes/actions/runs/29082925776",
-      "updatedAt": "2026-07-10T09:26:02Z"
+      "conclusion": "failure",
+      "branch": "feature/gateway5-stage1-koki",
+      "htmlUrl": "https://github.com/KURE-x-Tech/Spreading-Codes/actions/runs/29542463329",
+      "updatedAt": "2026-07-16T23:34:46Z"
     }
   }
 }
