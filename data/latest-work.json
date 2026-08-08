@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-08T21:20:44Z",
+  "generatedAt": "2026-08-08T22:18:20Z",
   "repo": {
     "name": "Spreading-Codes",
     "htmlUrl": "https://github.com/KURE-x-Tech/Spreading-Codes",
@@ -7,6 +7,14 @@
     "defaultBranch": "main",
     "updatedAt": "2026-08-08T13:18:33Z",
     "activity": [
+      {
+        "name": "Running Copilot Code Review",
+        "status": "completed",
+        "conclusion": "success",
+        "branch": "copilot/mp-62-subframe-2-parser",
+        "htmlUrl": "https://github.com/KURE-x-Tech/Spreading-Codes/actions/runs/31280580047",
+        "updatedAt": "2026-08-08T22:01:29Z"
+      },
       {
         "name": "PR #28",
         "status": "completed",
@@ -38,23 +46,15 @@
         "branch": "main",
         "htmlUrl": "https://github.com/KURE-x-Tech/Spreading-Codes/actions/runs/31259232047",
         "updatedAt": "2026-08-08T13:20:22Z"
-      },
-      {
-        "name": "Running Copilot cloud agent",
-        "status": "completed",
-        "conclusion": "success",
-        "branch": "copilot/mp-61-subframe-1-parser",
-        "htmlUrl": "https://github.com/KURE-x-Tech/Spreading-Codes/actions/runs/31195330734",
-        "updatedAt": "2026-08-07T16:03:40Z"
       }
     ],
     "workflow": {
-      "name": "PR #28",
+      "name": "Running Copilot Code Review",
       "status": "completed",
       "conclusion": "success",
-      "branch": "refs/pull/28/head",
-      "htmlUrl": "https://github.com/KURE-x-Tech/Spreading-Codes/actions/runs/31259532599",
-      "updatedAt": "2026-08-08T13:27:39Z"
+      "branch": "copilot/mp-62-subframe-2-parser",
+      "htmlUrl": "https://github.com/KURE-x-Tech/Spreading-Codes/actions/runs/31280580047",
+      "updatedAt": "2026-08-08T22:01:29Z"
     }
   }
 }
