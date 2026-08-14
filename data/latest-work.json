@@ -1,12 +1,28 @@
 {
-  "generatedAt": "2026-08-14T17:44:28Z",
+  "generatedAt": "2026-08-14T18:41:21Z",
   "repo": {
     "name": "Spreading-Codes",
     "htmlUrl": "https://github.com/KURE-x-Tech/Spreading-Codes",
     "description": "Contains the spreading codes used in the LunaNet protocol",
     "defaultBranch": "main",
-    "updatedAt": "2026-08-10T20:53:37Z",
+    "updatedAt": "2026-08-14T18:21:49Z",
     "activity": [
+      {
+        "name": "Push on main",
+        "status": "completed",
+        "conclusion": "success",
+        "branch": "main",
+        "htmlUrl": "https://github.com/KURE-x-Tech/Spreading-Codes/actions/runs/31828106142",
+        "updatedAt": "2026-08-14T18:21:39Z"
+      },
+      {
+        "name": "Push on main",
+        "status": "completed",
+        "conclusion": "success",
+        "branch": "main",
+        "htmlUrl": "https://github.com/KURE-x-Tech/Spreading-Codes/actions/runs/31827892917",
+        "updatedAt": "2026-08-14T18:18:57Z"
+      },
       {
         "name": "Scheduled",
         "status": "completed",
@@ -30,31 +46,15 @@
         "branch": "refs/pull/29/head",
         "htmlUrl": "https://github.com/KURE-x-Tech/Spreading-Codes/actions/runs/31431019259",
         "updatedAt": "2026-08-10T20:52:41Z"
-      },
-      {
-        "name": "Push on main",
-        "status": "completed",
-        "conclusion": "success",
-        "branch": "main",
-        "htmlUrl": "https://github.com/KURE-x-Tech/Spreading-Codes/actions/runs/31398792891",
-        "updatedAt": "2026-08-10T14:35:16Z"
-      },
-      {
-        "name": "PR #28",
-        "status": "completed",
-        "conclusion": "success",
-        "branch": "refs/pull/28/head",
-        "htmlUrl": "https://github.com/KURE-x-Tech/Spreading-Codes/actions/runs/31398181372",
-        "updatedAt": "2026-08-10T14:28:05Z"
       }
     ],
     "workflow": {
-      "name": "Scheduled",
+      "name": "Push on main",
       "status": "completed",
       "conclusion": "success",
       "branch": "main",
-      "htmlUrl": "https://github.com/KURE-x-Tech/Spreading-Codes/actions/runs/31788010894",
-      "updatedAt": "2026-08-14T09:27:44Z"
+      "htmlUrl": "https://github.com/KURE-x-Tech/Spreading-Codes/actions/runs/31828106142",
+      "updatedAt": "2026-08-14T18:21:39Z"
     }
   }
 }
